@@ -50,7 +50,7 @@ class ToDoList {
       listItem.innerHTML = `<input type="checkbox" class="checkbox"></input>${task.description}`;
       listItem.addEventListener('click', (event) => {
         if (event.target.className !== 'checkbox') {
-          let inputField = document.createElement('input');
+          const inputField = document.createElement('input');
           inputField.value = task.description;
           inputField.addEventListener('keyup', (event) => {
             if (event.code === 'Enter') {
