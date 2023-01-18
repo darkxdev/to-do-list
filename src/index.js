@@ -1,26 +1,28 @@
 class ToDoList {
   constructor() {
     this.tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    this.listContainer = document.getElementById('list-container');
+    this.list = this.listContainer.querySelector('ul') || document.createElement('ul');
+    this.listContainer.appendChild(this.list);
     this.populateList();
   }
 
   addTask(description) {
-    let task = {
-      description: description,
+    const task = {
+      description,
       completed: false,
-      index: this.tasks.length
-    }
+      index: this.tasks.length,
+    };
     this.tasks.push(task);
     localStorage.setItem('tasks', JSON.stringify(this.tasks));
+    this.populateList();
   }
 
   removeCompletedTasks() {
-    let listContainer = document.getElementById("list-container");
-    let list = listContainer.querySelector('ul');
-    let listItems = list.querySelectorAll('li');
-    let completedTasks = [];
-    for (let i = 0; i < listItems.length; i++) {
-      let checkbox = listItems[i].querySelector('.checkbox');
+    const listItems = this.list.querySelectorAll('li');
+    const completedTasks = [];
+    for (let i = 0; i < listItems.length; i += 1) {
+      const checkbox = listItems[i].querySelector('.checkbox');
       if (checkbox.checked) {
         completedTasks.push(i);
         listItems[i].remove();
@@ -34,40 +36,29 @@ class ToDoList {
   }
 
   populateList() {
-    let listContainer = document.getElementById("list-container");
-    let list = document.createElement("ul");
-
-    if(!listContainer.querySelector('ul')) {
-      listContainer.appendChild(list);
-    } else {
-      list = listContainer.querySelector('ul');
-      list.innerHTML = "";
-    }
-
-    for (let i = 0; i < this.tasks.length; i++) {
-      let task = this.tasks[i];
-      let listItem = document.createElement("li");
+    this.list.innerHTML = '';
+    for (let i = 0; i < this.tasks.length; i += 1) {
+      const task = this.tasks[i];
+      const listItem = document.createElement('li');
       listItem.innerHTML = `<input type="checkbox" class="checkbox"></input>${task.description}`;
-      let checkbox = listItem.querySelector('.checkbox');
-      
-      list.addEventListener('change', (event) => {
-        if(event.target.className === 'checkbox') {
+      this.list.addEventListener('change', (event) => {
+        if (event.target.className === 'checkbox') {
           task.completed = event.target.checked;
         }
       });
-      list.appendChild(listItem);
+      this.list.appendChild(listItem);
     }
   }
 }
 
 const toDoList = new ToDoList();
 
-document.addEventListener('keyup', function(event) {
-  let inputField = document.getElementById("input-field");
+document.addEventListener('keyup', (event) => {
+  const inputField = document.getElementById('input-field');
   if (event.code === 'Enter' && document.activeElement === inputField) {
     toDoList.addTask(inputField.value);
     toDoList.populateList();
-    inputField.value = "";
+    inputField.value = '';
   }
 });
 
