@@ -62,12 +62,12 @@ class ToDoList {
             if (event.code === 'Enter') {
               this.editTask(i, inputField.value);
               listItem.innerHTML = `<input type="checkbox" class="checkbox"></input><p class="description">${task.description}</p><i class="fa-regular fa-trash-can"></i>`;
-            };
+            }
           });
           listItem.innerHTML = '';
           listItem.appendChild(inputField);
           inputField.focus();
-        };
+        }
       });
 
       listItem.querySelector('.fa-trash-can').addEventListener('click', () => {
@@ -79,7 +79,6 @@ class ToDoList {
           task.completed = event.target.checked;
         }
       });
-      
       this.list.appendChild(listItem);
     }
   }
