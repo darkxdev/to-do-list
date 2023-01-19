@@ -20,8 +20,8 @@ class ToDoList {
 
   removeTask(index) {
     this.tasks.splice(index, 1);
-    for(let i = index; i < this.tasks.length; i++) {
-      this.tasks[i].index = i+1;
+    for (let i = index; i < this.tasks.length; i += 1) {
+      this.tasks[i].index = i + 1;
     }
     localStorage.setItem('tasks', JSON.stringify(this.tasks));
     this.populateList();
@@ -38,13 +38,12 @@ class ToDoList {
       }
     }
     this.tasks = this.tasks.filter((task, index) => !completedTasks.includes(index));
-    for(let i = 0; i < this.tasks.length; i += 1) {
-      this.tasks[i].index = i+1;
+    for (let i = 0; i < this.tasks.length; i += 1) {
+      this.tasks[i].index = i + 1;
     }
     localStorage.setItem('tasks', JSON.stringify(this.tasks));
     this.populateList();
   }
-
 
   editTask(index, newDescription) {
     if (index < this.tasks.length) {
@@ -57,7 +56,7 @@ class ToDoList {
   populateList() {
     this.list.innerHTML = '';
     for (let i = 1; i <= this.tasks.length; i += 1) {
-      const task = this.tasks[i-1];
+      const task = this.tasks[i - 1];
       const listItem = document.createElement('li');
       listItem.innerHTML = `<input type="checkbox" class="checkbox"></input><p class="description">${task.description}</p><i class="fa-regular fa-trash-can"></i>`;
       listItem.addEventListener('click', (event) => {
@@ -66,7 +65,7 @@ class ToDoList {
           inputField.value = task.description;
           inputField.addEventListener('keyup', (event) => {
             if (event.code === 'Enter') {
-              this.editTask(i-1, inputField.value);
+              this.editTask(i - 1, inputField.value);
               listItem.innerHTML = `<input type="checkbox" class="checkbox"></input><p class="description">${task.description}</p><i class="fa-regular fa-trash-can"></i>`;
             }
           });
@@ -76,7 +75,7 @@ class ToDoList {
         }
       });
       listItem.querySelector('.fa-trash-can').addEventListener('click', () => {
-        this.removeTask(i-1);
+        this.removeTask(i - 1);
       });
       this.list.addEventListener('change', (event) => {
         if (event.target.className === 'checkbox') {
