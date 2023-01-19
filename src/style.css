@@ -48,6 +48,14 @@ ul li {
   margin: 0;
   padding: 14px;
   border-bottom: 1px solid lightgray;
+  display: flex;
+  justify-content: space-between;
+}
+
+ul li p {
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 .checkbox {
