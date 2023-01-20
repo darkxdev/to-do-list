@@ -1,7 +1,9 @@
-import ToDoList from './toDoList.js';
-
 export default class removeCheckbox {
-  removeCompletedTasks(toDoList) {
+  constructor(toDoList) {
+    this.toDoList = toDoList;
+  }
+
+  removeCompletedTasks() {
     const listItems = document.querySelectorAll('li');
     const completedTasks = [];
     for (let i = 0; i < listItems.length; i += 1) {
@@ -11,11 +13,13 @@ export default class removeCheckbox {
         listItems[i].remove();
       }
     }
-    toDoList.tasks = toDoList.tasks.filter((task, index) => !completedTasks.includes(index));
-    for (let i = 0; i < toDoList.tasks.length; i += 1) {
-      toDoList.tasks[i].index = i + 1;
+    this.toDoList.tasks = (
+      this.toDoList.tasks.filter((task, index) => !completedTasks.includes(index))
+    );
+    for (let i = 0; i < this.toDoList.tasks.length; i += 1) {
+      this.toDoList.tasks[i].index = i + 1;
     }
-    localStorage.setItem('tasks', JSON.stringify(toDoList.tasks));
-    toDoList.populateList();
+    localStorage.setItem('tasks', JSON.stringify(this.toDoList.tasks));
+    this.toDoList.populateList();
   }
 }
