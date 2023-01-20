@@ -1,6 +1,8 @@
 import ToDoList from './toDoList.js';
+import removeCheckbox from './removeCheckbox.js';
 
 const toDoList = new ToDoList();
+const removeCheckboxObject = new removeCheckbox();
 
 document.addEventListener('keyup', (event) => {
   const inputField = document.getElementById('input-field');
@@ -14,5 +16,5 @@ document.addEventListener('keyup', (event) => {
 const clearButton = document.getElementById('clear-button');
 
 clearButton.addEventListener('click', () => {
-  toDoList.removeCompletedTasks();
+  removeCheckboxObject.removeCompletedTasks(toDoList);
 });
