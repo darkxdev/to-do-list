@@ -1,4 +1,4 @@
-class ToDoList {
+export default class ToDoList {
   constructor() {
     this.tasks = JSON.parse(localStorage.getItem('tasks')) || [];
     this.listContainer = document.getElementById('list-container');
@@ -21,24 +21,6 @@ class ToDoList {
   removeTask(index) {
     this.tasks.splice(index, 1);
     for (let i = index; i < this.tasks.length; i += 1) {
-      this.tasks[i].index = i + 1;
-    }
-    localStorage.setItem('tasks', JSON.stringify(this.tasks));
-    this.populateList();
-  }
-
-  removeCompletedTasks() {
-    const listItems = this.list.querySelectorAll('li');
-    const completedTasks = [];
-    for (let i = 0; i < listItems.length; i += 1) {
-      const checkbox = listItems[i].querySelector('.checkbox');
-      if (checkbox.checked) {
-        completedTasks.push(i);
-        listItems[i].remove();
-      }
-    }
-    this.tasks = this.tasks.filter((task, index) => !completedTasks.includes(index));
-    for (let i = 0; i < this.tasks.length; i += 1) {
       this.tasks[i].index = i + 1;
     }
     localStorage.setItem('tasks', JSON.stringify(this.tasks));
@@ -86,5 +68,3 @@ class ToDoList {
     }
   }
 }
-
-export default ToDoList;
