@@ -46,6 +46,10 @@ To Do List is a project done at Microverse for portfolio showcase and learning p
 
 <!-- LIVE DEMO -->
 
+You can checkout the live running version of this app at the following link:
+
+https://darkxdev.github.io/To-Do-List/dist/
+
 <!-- GETTING STARTED -->
 
 ## 💻 Getting Started <a name="getting-started"></a>
